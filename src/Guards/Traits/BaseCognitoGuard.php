@@ -314,7 +314,13 @@ trait BaseCognitoGuard
             } //End if
             
             //Create user into local DB, if not exists
-            $user = $userModel::updateOrCreate($dataUser);
+            $user = $userModel::updateOrCreate([
+                'email' => $dataUser['email']
+            ],
+            [
+                'name' => $dataUser['name'],
+            ]
+            );
         } //End if
 
         return $user;
