@@ -319,6 +319,7 @@ trait BaseCognitoGuard
             ],
             [
                 'name' => $dataUser['name'],
+                'sub' => $dataUser['sub'],
             ]
             );
         } //End if
