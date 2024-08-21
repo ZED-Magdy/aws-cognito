@@ -148,6 +148,7 @@ trait BaseCognitoGuard
 
             case 'SMS_MFA':
             case 'SELECT_MFA_TYPE':
+            case 'NEW_PASSWORD_REQUIRED':
                 $returnValue = [
                     'status' => $result['ChallengeName'],
                     'session_token' => $result['Session'],
