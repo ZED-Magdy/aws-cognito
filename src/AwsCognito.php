@@ -11,6 +11,8 @@
 
 namespace Ellaisys\Cognito;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Password;
@@ -267,12 +269,14 @@ class AwsCognito
     public function authenticate()
     {
         $claim = $this->manager->fetch($this->token->get())->decode();
+        $user = User::where('sub', $claim['sub'])->first();
         $this->claim = $claim;
-
+        if ($user) {
+            Auth::login($user);
+        } //End if
         if (empty($this->claim)) {
             throw new InvalidTokenException();
         } //End if
-
         return $this; //->user();
     } //Function ends
 
