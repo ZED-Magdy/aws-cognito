@@ -272,7 +272,7 @@ class AwsCognito
         $user = User::where('sub', $claim['sub'])->first();
         $this->claim = $claim;
         if ($user) {
-            Auth::login($user);
+            Auth::gaurd('api')->login($user);
         } //End if
         if (empty($this->claim)) {
             throw new InvalidTokenException();
